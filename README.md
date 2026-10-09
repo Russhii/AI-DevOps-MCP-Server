@@ -1,6 +1,5 @@
 # AI DevOps MCP Server
 
-![Live Demo Session](assets/demo.png)
 
 An AI DevOps assistant built on the **Model Context Protocol (MCP)** with the **MCP Python SDK 2.x** (`MCPServer`, Streamable HTTP).
 An LLM (Groq) discovers tools from the server at runtime and calls them through an MCP client.
@@ -60,7 +59,7 @@ python evaluation.py          # tool-selection metrics (needs server + GROQ_API_
 | `client.py`, `agent.py`, `evaluation.py` | MCP client, LLM agent loop, tool-selection evaluation |
 | `alembic/` | Database migrations (use with PostgreSQL) |
 
-## How the pieces work (interview notes)
+## How the pieces work
 
 **MCP.** A standard protocol so any LLM app can discover and call tools on any server. Server = exposes *tools* (actions), *resources* (readable data, e.g. `tasks://summary`) and *prompts* (templates, e.g. `triage_github_issues`). Client = connects, lists, calls. **Streamable HTTP** = one HTTP endpoint (`/mcp`) carrying JSON-RPC, with optional streaming; works behind load balancers, unlike stdio.
 
@@ -108,3 +107,5 @@ Migrations: `alembic upgrade head`. After changing the model: `alembic revision 
 ## Deployment
 
 See `docs/AWS_DEPLOYMENT.md`. CI (`.github/workflows/ci.yml`) runs lint, tests, and a Docker build on every push.
+
+![Live Demo Session](assets/demo.png)
