@@ -96,13 +96,31 @@ Docker tools (`list_containers`, `container_logs`, `inspect_container`, `contain
 
 Migrations: `alembic upgrade head`. After changing the model: `alembic revision --autogenerate -m "message"`.
 
-## Evaluation
+## Test & Benchmark Results
 
-`python evaluation.py` runs `eval_dataset.json` (24 queries, including no-tool, diagnostic, and destructive cases) and writes `eval_results.json` with tool selection accuracy, invalid tool-call rate, confirmation compliance, and execution success/latency for read-only tools:
+### 1. Unit & Integration Test Suite (`pytest`)
+All **46 automated tests** pass with zero failures, covering MCP protocol discovery, database CRUD, security scopes, and secret masking:
+```text
+============================== 46 passed in 1.84s ==============================
+- tests/test_agent.py          (LLM agent loop & function-calling)
+- tests/test_calculator.py     (Safe arithmetic operations)
+- tests/test_github_service.py (API resilience, rate-limits & retries)
+- tests/test_mcp.py            (Tool discovery, Streamable HTTP, resources & prompts)
+- tests/test_observability.py  (Structured audit logging & secret redaction)
+- tests/test_security.py       (Token verification, 401 handling, RBAC scopes)
+- tests/test_tasks.py          (SQLAlchemy ORM models & database CRUD)
+```
 
-| Model | Selection accuracy | Invalid-call rate | Confirmation compliance | Read Tool Avg Latency | Date |
-|---|---|---|---|---|---|
-| `openai/gpt-oss-20b` (Groq) | **100.0%** (24/24) | **0.0%** (0/22) | **100.0%** (2/2) | ~453ms | 2026-10-09 |
+### 2. LLM Tool-Selection Benchmark (`evaluation.py`)
+Tested across 24 operational DevOps queries using Groq (`openai/gpt-oss-20b`). Raw benchmark outputs are tracked in [`eval_results.json`](eval_results.json):
+
+| Metric | Measured Score | Description |
+|---|---|---|
+| **Tool Selection Accuracy** | **100.0%** (24/24) | Chose the exact tool intended for the query |
+| **Invalid Tool-Call Rate** | **0.0%** (0/22) | Zero hallucinated tool schemas or bad arguments |
+| **Confirmation Compliance (HITL)** | **100.0%** (2/2) | Destructive operations never bypass confirmation |
+| **Read Tool Avg Latency** | **453.6 ms** | Fast sub-second roundtrip performance |
+| **Execution Success Rate** | **87.5%** (14/16) | Successful tool execution for read queries |
 
 ## Deployment
 

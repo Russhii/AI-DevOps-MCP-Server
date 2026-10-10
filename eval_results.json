@@ -1,0 +1,130 @@
+{
+  "model": "openai/gpt-oss-20b",
+  "tool_selection_accuracy": "100.0% (24/24)",
+  "invalid_tool_call_rate": "0.0% (0/22)",
+  "confirmation_compliance": "100.0% (2/2)",
+  "execution_success_rate (read tools)": "87.5% (14/16)",
+  "avg_tool_latency_ms (read tools)": 453.6,
+  "cases": [
+    {
+      "query": "What's the weather in Pune?",
+      "expected": null,
+      "chosen": null
+    },
+    {
+      "query": "Tell me a joke about Python.",
+      "expected": null,
+      "chosen": null
+    },
+    {
+      "query": "What is 15 multiplied by 12?",
+      "expected": "calculate",
+      "chosen": "calculate"
+    },
+    {
+      "query": "Divide 100 by 8.",
+      "expected": "calculate",
+      "chosen": "calculate"
+    },
+    {
+      "query": "Find FastAPI repositories on GitHub.",
+      "expected": "search_github",
+      "chosen": "search_github"
+    },
+    {
+      "query": "Search GitHub for popular Rust web frameworks.",
+      "expected": "search_github",
+      "chosen": "search_github"
+    },
+    {
+      "query": "Show me details of the repository tiangolo/fastapi.",
+      "expected": "get_repository",
+      "chosen": "get_repository"
+    },
+    {
+      "query": "How many stars does pallets/flask have?",
+      "expected": "get_repository",
+      "chosen": "get_repository"
+    },
+    {
+      "query": "List the open issues in psf/requests.",
+      "expected": "get_issues",
+      "chosen": "get_issues"
+    },
+    {
+      "query": "Show closed bug issues of pallets/click.",
+      "expected": "get_issues",
+      "chosen": "get_issues"
+    },
+    {
+      "query": "Create a task to deploy the API.",
+      "expected": "create_task",
+      "chosen": "create_task"
+    },
+    {
+      "query": "Add a high priority task: fix login bug.",
+      "expected": "create_task",
+      "chosen": "create_task"
+    },
+    {
+      "query": "Show pending tasks.",
+      "expected": "get_tasks",
+      "chosen": "get_tasks"
+    },
+    {
+      "query": "What tasks do I have?",
+      "expected": "get_tasks",
+      "chosen": "get_tasks"
+    },
+    {
+      "query": "Mark task 3 as completed.",
+      "expected": "update_task",
+      "chosen": "update_task"
+    },
+    {
+      "query": "Change the priority of task 2 to low.",
+      "expected": "update_task",
+      "chosen": "update_task"
+    },
+    {
+      "query": "Delete task 5.",
+      "expected": "delete_task",
+      "chosen": "delete_task"
+    },
+    {
+      "query": "Remove task 1 permanently.",
+      "expected": "delete_task",
+      "chosen": "delete_task"
+    },
+    {
+      "query": "Which Docker containers are running?",
+      "expected": "list_containers",
+      "chosen": "list_containers"
+    },
+    {
+      "query": "Show the last 20 log lines of the container named web.",
+      "expected": "container_logs",
+      "chosen": "container_logs"
+    },
+    {
+      "query": "Inspect the configuration and ports of the db container.",
+      "expected": "inspect_container",
+      "chosen": "inspect_container"
+    },
+    {
+      "query": "Show live CPU and memory stats for the running containers.",
+      "expected": "container_stats",
+      "chosen": "container_stats"
+    },
+    {
+      "query": "What operating system and Python version is the server on?",
+      "expected": "system_info",
+      "chosen": "system_info"
+    },
+    {
+      "query": "How many CPUs does the server have?",
+      "expected": "system_info",
+      "chosen": "system_info"
+    }
+  ]
+}
